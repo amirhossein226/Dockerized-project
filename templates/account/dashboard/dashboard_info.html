@@ -1,0 +1,41 @@
+{% extends "account/bases/dashboard_base.html" %}
+{% load jalali_tags %}
+{% block title %}اطلاعات حساب کاربری{% endblock title %}
+
+{% block prof_body %}
+<h1>صفحه داشبورد</h1>
+<h2>سلام {{ request.user.first_name|default:request.user.username|title }}</h2>
+<h5>اطلاعات حساب کاربری شما:</h5>
+
+<ul>
+    {% with user.profile.photo as photo %}
+    {% if photo %}
+    <div>
+        <img src="{{ photo.url }}" alt="یاالله">
+    </div>
+    {% endif %}
+    {% endwith %}
+    <li>
+        <label for="username">نام کاربری:&nbsp;&nbsp;</label>
+        <span id="username">{{ user.username }}</span>
+    </li>
+    <li>
+        <label for="email-address">آدرس ایمیل:&nbsp;&nbsp;</label>
+        <span id="email-address">{{ user.email }}</span>
+    </li>
+    <li>
+        <label for="first-name">نام:&nbsp;&nbsp;</label>
+        <span id="first-name">{{ user.first_name|default:"وارد نشده" }}</span>
+    </li>
+    <li>
+        <label for="last-name">نام خانوادگی:&nbsp;&nbsp;</label>
+        <span id="last-name">{{ user.last_name|default:"وارد نشده" }}</span>
+    </li>
+    <li>
+        <label for="username">تاریخ تولد:&nbsp;&nbsp;</label>
+        <span id="username">{{ user.profile.date_of_birth|to_jalali:"%A %d %B %Y" | default:"وارد نشده" }}</span>
+    </li>
+</ul>
+
+
+{% endblock prof_body %}

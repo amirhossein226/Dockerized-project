@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+
+{% block title %}اشتراک گذاری{% endblock title %}
+
+{% block content %}
+{% if shared %}
+<h2>پست موردنظر با موفقیت ارسال شد</h2>
+{% else %}
+<h3>جهت اشتراک گذاری از فرم زیر استفاده کنید:</h3>
+<div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="اشتراک گذاری">
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

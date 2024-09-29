@@ -1,0 +1,159 @@
+@font-face {
+    font-family: 'Vazir-bold';
+    src: url('./fonts/vazir/Vazir-Bold.eot');
+    src: url('./fonts/vazir/Vazir-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/vazir/Vazir-Bold.woff') format('woff'),
+        url('./fonts/vazir/Vazir-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'yekan-regular';
+    src: url('./fonts/yekan-font/yekan-regular.eot');
+    src: url('./fonts/yekan-font/yekan-regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/yekan-font/yekan-regular.woff') format('woff'),
+        url('./fonts/yekan-font/yekan-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/css?family=Muli);
+
+body {
+    direction: rtl;
+    font-family: "yekan-regular", sans-serif;
+    font-size: 12px;
+}
+
+a {
+    color: #5c6962;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00a74f;
+}
+
+p {
+    line-height: 1.8;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Vazir-bold';
+    font-weight: normal;
+}
+
+
+.just {
+    text-align: justify;
+}
+
+.container {
+    padding: 1rem;
+    height: 100%;
+}
+
+.content {
+    float: right;
+    width: 60%;
+}
+
+#header {
+    padding: 10px 100px;
+    font-size: 14px;
+    background: #12c064;
+    color: #fff;
+    border-bottom: 4px solid #1cdf78;
+    overflow: auto;
+}
+
+#header .logo {
+    font-family: 'Muli', sans-serif;
+    float: left;
+    color: #f3f7cc;
+    font-size: 20px;
+    margin-right: 10%;
+}
+
+#header ul.menu {
+    list-style: none;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#header ul.menu li {
+    float: left;
+    padding: 4px 10px;
+}
+
+#header ul.menu li.selected a,
+#header ul.menu li.selected a:hover {
+    color: #1b6d32;
+    font-weight: bold;
+}
+
+#header a {
+    color: #f3f7cc;
+}
+
+#header a:hover {
+    color: #fff;
+}
+
+#header .user {
+    float: right;
+    padding-top: 4px;
+}
+
+#header .user form {
+    display: inline;
+    float: right;
+}
+
+#header .user button {
+    font-family: "yekan-regular";
+    background: none;
+    color: #f3f7cc;
+    border: none;
+    cursor: pointer;
+    float: left;
+    display: inline;
+}
+
+form label {
+    display: block;
+}
+
+.profile-sidebar {
+    float: right;
+    width: 20%;
+    background-color: #a6edca;
+}
+
+.profile-body {
+    padding-right: 2rem;
+    float: right;
+    width: 70%;
+}
+
+ul.list-items {
+    line-height: 2;
+    padding: 20px 10px;
+    list-style: none;
+}
+
+ul.list-items li {
+    line-height: 4;
+}
+
+.selected {
+    background-color: rgb(197, 196, 196);
+}

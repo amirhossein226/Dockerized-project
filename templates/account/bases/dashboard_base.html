@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% load blog_tags %}
+{% block title %}داشبورد{% endblock title %}
+
+{% block content %}
+<div class=dashboard-container>
+    <div class="profile-sidebar">
+        <ul class="list-items">
+            <li class={% check selected 'info' %}>
+                <a href="{% url 'dashboard' %}">اطلاعات حساب کاربری</a>
+            </li>
+
+            <li class={% check selected 'edit' %}>
+                <a href="{% url 'edit_profile' %}">تغییر اطلاعات کاربری</a>
+            </li>
+
+            <li class={% check selected 'change_password' %}>
+                <a href="{% url 'password_change' %}">تغییر رمز عبور</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="profile-body">
+        {% block prof_body %}
+        {% endblock prof_body %}
+    </div>
+</div>
+{% endblock content %}

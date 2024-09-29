@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+{% load blog_tags %}
+{% block title %}ورود{% endblock title %}
+
+{% block content %}
+<h1>ورود به وبسایت</h1>
+{% if next %}
+<h2>لطفا ابتدا وارد حساب خود شوید:</h2>
+{% else %}
+<h2>لطفا از فرم زیر جهت ورود به سایت استفاده کنید:</h2>
+{% endif %}
+
+<div class="login_form">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div>
+            {{ form.username.errors }}
+            <label for="{{ form.username.id_for_label }}"><strong>نام کاربری/ایمیل:</strong></label>
+            {{ form.username }}
+        </div>
+
+        <div>
+            {{ form.password.errors }}
+            <label for="{{ id_for_label }}"><strong>رمز عبور:</strong></label>
+            {{ form.password }}
+        </div>
+
+        <input type="hidden" name="next" value="{{ next }}">
+        <input type="submit" value="ورود">
+    </form>
+    <p>
+        <a href="{% url 'password_reset' %}">رمز عبور خود را فراموش {{ "کرده ام" | no_space}}.</a>
+    </p>
+
+    <p>
+        <a href="{% url 'register' %}">در حال حاضر حساب کاربری ندارم.</a>
+    </p>
+
+    <p>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">ورود با اکانت گوگل</a>
+    </p>
+    {{ form.none_field_errors }}
+</div>
+{% endblock content %}

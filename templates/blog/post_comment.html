@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block title %}ثبت نظر{% endblock title %}
+
+
+{% block content %}
+
+{% if comment %}
+<h2>نظر شما با موفقیت ثبت گردید.</h2>
+<h4><a href="{{ post.get_absolute_url }}">بازگشت به {{ post.title }}</a></h4>
+{% else %}
+<h2>خطایی رخ داده!</h2>
+<h3>دوباره اقدام کنید:</h3>
+{% include 'blog/bases/comment_form.html' with comment_form=form post=post %}
+{% endif %}
+
+{% endblock content %}

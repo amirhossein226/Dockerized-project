@@ -1,0 +1,39 @@
+{% extends "account/bases/dashboard_base.html" %}
+
+{% block title %}تغییر اطلاعات{% endblock title %}
+
+{% block prof_body %}
+<h1>تغییر اطلاعات حساب کاربری</h1>
+<p><strong>از فرم زیر می توانید جهت تغییر اطلاعات خود استفاده کنید:</strong></p>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {{ user_form.email.errors }}
+        <label for="{{ user_form.email.id_for_label }}"><strong>آدرس ایمیل:</strong></label>
+        {{ user_form.email }}
+    </div>
+    <div>
+        {{ user_form.first_name.errors }}
+        <label for="{{ user_form.first_name.id_for_label }}"><strong>نام:</strong></label>
+        {{ user_form.first_name }}
+    </div>
+    <div>
+        {{ user_form.last_name.errors }}
+        <label for="{{ user_form.last_name.id_for_label }}"><strong>نام خانوادگی:</strong></label>
+        {{ user_form.last_name }}
+    </div>
+    <div>
+        {{ profile_form.date_of_birth.as_field_group }}
+    </div>
+    <div>
+        {{ profile_form.photo.errors }}
+        {{ profile_form.photo.label_tag }}
+        {{ profile_form.photo }}
+    </div>
+
+    <input type="submit" value="اعمال تغییرات">
+</form>
+
+{{ user_form.non_field_errors }}
+{{ profile_form.non_field_errors }}
+{% endblock prof_body %}

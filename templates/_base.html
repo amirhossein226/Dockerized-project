@@ -1,0 +1,76 @@
+{% load static %}
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="{% static 'css/fonts/vazir/Vazir-Bold.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}Home{% endblock title %}</title>
+</head>
+
+<body>
+    <!--ا header section ==================================================================================================================== -->
+    <div id="header">
+        <span class="logo">Asin Laboratory</span>
+        <ul class="menu">
+            {% if user.is_authenticated %}
+            <li class={% check selected "dashboard" %}>
+                <a href="{% url 'dashboard' %}">پروفایل</a>
+            </li>
+            {% endif %}
+
+            <li class={% check selected "home" %}>
+                <a href="{% url 'pages:home' %}">خانه</a>
+            </li>
+
+            <li class={% check selected "about" %}>
+                <a href="#">درباره ما</a>
+            </li>
+            <li class={% check selected "blog" %}>
+                <a href="{% url 'blog:post_list' %}">تحقیقات</a>
+            </li>
+
+        </ul>
+        <span class="user">
+            {% if request.user.is_authenticated %}
+            <span>{{ request.user.first_name|default:request.user.username }}</span>
+            <form action="{% url  'logout' %}" method="post">
+                <button type="submit"> خروج &nbsp;| </button>
+                {% csrf_token %}
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}"> ورود به حساب </a>&nbsp; | &nbsp;<a href="{% url 'register' %}">ایجاد حساب</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <!-- messages ==================================================================================================================== -->
+    {% if messages %}
+    <ul class="messages">
+        <!-- You must iterate over the messages variable, if you don't iterate over it, then the messages variable don't be clean for ahead requests -->
+        {% for messages in messages %}
+        <li {% if messages.tags %} class="{{ messages.tags }}" {% endif %}>
+            {{ messages|safe }}
+            <a href="#" class="close">x</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- body ==================================================================================================================== -->
+    <div class="container">
+        <div class="content">
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+    <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}">
+    <script src="{% static 'admin/js/django_jalali.min.js' %}"></script>
+</body>
+
+</html>

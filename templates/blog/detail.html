@@ -1,0 +1,61 @@
+{% extends '_base.html' %}
+{% load jalali_tags %}
+{% load blog_tags %}
+
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>منتشر شده در: {{ post.publish | to_jalali:"%Y/%m/%d" | to_farsi_num }}</p>
+<hr>
+<p class="just">{{ post.body }}</p>
+<p>
+    <a href="{% url 'blog:post_share' post.slug %}">اشتراک گذاری با دوستان</a>
+</p>
+
+<p class="tags">
+    {% include 'blog/bases/tags.html' with post=post %}
+</p>
+
+{% with post.comments.all as comments %}
+<div class="comments">
+    <h2>{{ "کامنت ها" | no_space }}</h2>
+    <p><b>تعداد {{ "کامنت های" | no_space }} ثبت شده:</b> {{ comments.count | to_farsi_num }}</p>
+    <dl>
+        {% for comment in comments %}
+        <dt>
+            <b>کامنت {{ forloop.counter | to_farsi_num }}</b>
+        </dt>
+        <dd>
+            <dl>
+                <dt>
+                    <p class="date">توسط {{ comment.author_name }} در تاریخ
+                        {{ comment.created | to_jalali:"%Y/%m/%d" | to_farsi_num }}
+                    </p>
+                </dt>
+                <dd>
+                    <p>{{ comment.body }}</p>
+                </dd>
+            </dl>
+        </dd>
+
+        {% empty %}
+        <dt>در حال حاضر کامنتی ثبت نشده!</dt>
+        {% endfor %}
+    </dl>
+
+</div>
+<div class="comment-form">
+    {% if comments %}
+    <h2>از فرم زیر برای ثبت نظر استفاده کنید:</h2>
+    {% else %}
+    <h2>اولین نظر را شما ثبت کنید:</h2>
+    {% endif %}
+    {% include 'blog/bases/comment_form.html' with comment_form=comment_form post=post %}
+
+</div>
+{% endwith %}
+
+
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% load blog_tags %}
+
+<b>{{ "تگ ها" | no_space }}:</b>
+{% with post.tags.all as tags %}
+{% if tags %}
+{% for tag in tags %}
+<a href="{% myurl 'blog:post_by_tag' tag.slug %}">{{ tag.name }}</a>
+{% if not forloop.last %},{% endif%}
+{% endfor %}
+{% endif %}
+{% endwith %}

@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+{% load blog_tags %}
+{% load jalali_tags %}
+
+{% block title %}Posts{% endblock title %}
+
+
+{% block content %}
+{% autoescape off %}
+<h1>{{ "پست های" | no_space }} منتشر شده {% if tag %}با تگ "{{ tag.slug }}"{% endif %}</h1>
+<h2>تعداد کل {{ "پست های" | no_space }} منتشر شده: {{ posts.count | to_farsi_num }}</h2>
+
+{% if posts %}
+<div class="posts">
+    {% for post in posts %}
+    <div class="post">
+        <!-- post title ====================================================================================== -->
+        <h3 class="title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+
+        <!-- post publish ======================================================================================= -->
+        <p> تاریخ انتشار: {{ post.publish| to_jalali:"%Y/%m/%d " | to_farsi_num }}</p>
+
+        <!-- post tags======================================================================================= -->
+        <p>
+            {% include 'blog/bases/tags.html' with post=post %}
+        </p>
+
+        <!-- post body ======================================================================================= -->
+        <p class="just">{{ post.body|truncatewords:100 }}</p>
+        <!-- ======================================================================================= -->
+
+    </div>
+    {% endfor %}
+
+    {% include "blog/bases/paginate.html" with page=posts %}
+</div>
+
+{% else %}
+<p>فعلا پستی منتشر نشده.</p>
+{% endif %}
+{% endautoescape %}
+
+{% endblock content %}

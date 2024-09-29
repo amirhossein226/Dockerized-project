@@ -1,0 +1,34 @@
+{% extends "_base.html" %}
+
+{% block title %}ایجاد حساب{% endblock title %}
+
+
+{% block content %}
+<h1>ایجاد حساب</h1>
+{% if registered %}
+<h3>حساب شما با موفقیت ایجاد شد.لطفا از <a href="{% url 'login' %}">این لینک</a> جهت ورود به سایت استفاده کنید.</h3>
+{% else %}
+<h5>لطفا از فرم زیر جهت ایجاد حساب کاربری استفاده کنید:</h5>
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <div>
+        {{ form.email.errors }}
+        <label for="{{ form.email.id_for_label }}"><strong>آدرس ایمیل:</strong></label>
+        {{ form.email }}
+    </div>
+    <div>
+        {{ form.username.errors }}
+        <label for="{{ form.username.id_for_label }}"><strong>نام کاربری:</strong></label>
+        {{ form.username }}
+    </div>
+    <div>
+        {{ form.password1.as_field_group }}
+    </div>
+    <div>
+        {{ form.password2.as_field_group }}
+    </div>
+    <input type="submit" value="ایجاد حساب">
+</form>
+{{ form.none_field_errors }}
+{% endif %}
+{% endblock content %}
